@@ -37,11 +37,12 @@ defmodule DemoWeb.UserLoginLive do
   end
 
   def handle_event("1", %{"v" => v}, socket) do
-
+      socket =
+        socket |> assign(focus: false)
     cond do
       v == "cancel" ->
         s = String.length(socket.assigns.pin)
-        s = String.slice("elixir", 0, s-1)
+        s = String.slice(socket.assigns.pin, 0, s-1)
 
         {:noreply,  socket |> assign(pin: s)}
       v == "reset" ->
@@ -74,7 +75,7 @@ end
   def mount(_params, _session, socket) do
     email = Phoenix.Flash.get(socket.assigns.flash, :email)
     form = to_form(%{"email" => email}, as: "user")
-    {:ok, assign(socket, form: form, pin: "", email: "", password: ""), temporary_assigns: [form: form]}
+    {:ok, assign(socket, form: form, pin: "", email: "", password: "", focus: true), temporary_assigns: [form: form] }
   end
 
 

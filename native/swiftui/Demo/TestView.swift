@@ -1,16 +1,22 @@
-struct TestView: View {
+import SwiftUI
+import LiveViewNative
+import LiveViewNativeLiveForm
+
+
+
+struct DetailView: View {
+    @State private var x = ""
+    
+    
+    
     var body: some View {
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Hello World2")
+            
         }
-        .padding()
-    }
-}
+        
+        
+        
+    }}
 
-
-#Preview {
-    ContentView()
-}

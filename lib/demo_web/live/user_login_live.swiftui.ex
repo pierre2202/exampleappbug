@@ -32,10 +32,10 @@ defmodule DemoWeb.UserLoginLive.SwiftUI do
       <Section>
         <.input style="frame(width: 200)" class="keyboardType(.emailAddress)" field={@form[:email]} value={@email} type="TextField" label="Email" />
         <.input style="frame(width: 225)" field={@form[:password]} value={@password} type="SecureField" label="Password" />
-        <.input style="frame(width: 225) disabled(true)"  field={@form[:pin]}  value={@pin} type="SecureField" label="Pin"> </.input>
 
+        <SecureField style={["frame(width: 225)","disabled(true)",~s[focused(attr("focus"))]]} focus={@focus}  text={@pin} name="pin">Pin</SecureField>
 
-
+        <Text> <%= @pin %> </Text>
         <Group template="footer">
           <.link navigate={~p"/users/reset-password"} class="font-caption font-weight-semibold">
            Mot de passe oublié
