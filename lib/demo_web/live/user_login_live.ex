@@ -37,27 +37,36 @@ defmodule DemoWeb.UserLoginLive do
   end
 
   def handle_event("1", %{"v" => v}, socket) do
-      socket =
-        socket |> assign(focus: false)
-    cond do
-      v == "cancel" ->
-        s = String.length(socket.assigns.pin)
-        s = String.slice(socket.assigns.pin, 0, s-1)
+    socket =
+      socket |> assign(focus: "false")
 
-        {:noreply,  socket |> assign(pin: s)}
-      v == "reset" ->
-        {:noreply,  socket |> assign(pin: "")}
+    send(self(), {"test", %{v: v}})
 
-        true ->
-  {:noreply,  socket |> assign(pin: socket.assigns.pin <> v)}
 
-      end
+    {:noreply, socket}
 
 end
 
-def handle_info("test", socket) do
+def handle_info({"test", %{v: v}}, socket) do
+  cond do
+    v == "cancel" ->
+      s = String.length(socket.assigns.pin)
+      s = String.slice(socket.assigns.pin, 0, s-1)
 
-  {:noreply, socket |>  push_patch(to: ~p"/users/log_in")}
+    socket =  socket |> assign(pin: s)
+    {:noreply, socket |> assign(focus: "true") }
+    v == "reset" ->
+      socket = socket |> assign(pin: "")
+      {:noreply, socket |> assign(focus: "true") }
+
+      true ->
+socket =  socket |> assign(pin: socket.assigns.pin <> v)
+{:noreply, socket |> assign(focus: "true") }
+
+      end
+
+
+
 
 end
 
@@ -75,7 +84,7 @@ end
   def mount(_params, _session, socket) do
     email = Phoenix.Flash.get(socket.assigns.flash, :email)
     form = to_form(%{"email" => email}, as: "user")
-    {:ok, assign(socket, form: form, pin: "", email: "", password: "", focus: true), temporary_assigns: [form: form] }
+    {:ok, assign(socket, form: form, pin: "", email: "", password: "", focus: "true"), temporary_assigns: [form: form] }
   end
 
 

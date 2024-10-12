@@ -1,9 +1,6 @@
 defmodule DemoWeb.UserLoginLive.SwiftUI do
   use DemoNative, [:render_component, format: :swiftui]
 
-  import DemoWeb.Components.SwiftUI
-
-  import DemoWeb.UserLive.Components.SwiftUI
 
   def render(assigns, _) do
     ~LVN"""

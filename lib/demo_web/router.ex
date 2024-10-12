@@ -64,7 +64,7 @@ defmodule DemoWeb.Router do
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{DemoWeb.UserAuth, :redirect_if_user_is_authenticated}] do
       live "/users/register", UserRegistrationLive, :new
-      live "/users/log_in", UserLoginLive, :new
+      live "/", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end
@@ -90,16 +90,7 @@ defmodule DemoWeb.Router do
 
     live_session :current_user,
       on_mount: [{DemoWeb.UserAuth, :mount_current_user}] do
-        live "/moderation", ModerationLive
-      live "/:id/index", IndexLive
-      live "/profil/:id", ProfilLive
-      live "/chat", ChatLive
-      live "/projet/:id", DemoWeb.ShowLive
-      live "/messagerie", MessagerieLive
-      live "/", HomeLive
-      live "/search", SearchLive
-      live "/:id/debat", DebatLive
-      live "/:id", VoteLive
+ 
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
 

@@ -29,9 +29,9 @@ struct ContentView: View {
                     Image(systemName: loginVM.isAuthenticated ? "lock.fill": "lock.open")
                     
                 }
-                TextField("Email", text: $x).focused($isFocused)
+                TextField("Email", text: $loginVM.email )
                 SecureField("Mot de passe", text: $loginVM.password)
-                SecureField("Pin", text: $loginVM.pin)
+                SecureField("Pin", text: $x).focused($isFocused)
                 HStack{
                     Spacer()
                     if loginVM.isAuthenticated == false {
